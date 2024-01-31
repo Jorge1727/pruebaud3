@@ -34,7 +34,7 @@
                         <select class="js-select2 form-control" th:field="*{id_idioma}">
                             <option value="-1" th:text="#{error.seleccione} +''+#{idioma}"></option>
                             <option
-                                    th:each="idioma:${listaIdioma}"
+                                    th:each="idioma:${listaIdiomas}"
                                     th:value="${idioma.id_idioma}"
                                     th:text="${'Id: ' + idioma.id_idioma + ' - ' + idioma.nombre}">
                             </option>
