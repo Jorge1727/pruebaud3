@@ -1,0 +1,56 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Crear Pelicula</title>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-9">
+            <div class="card">
+                <form th:action="@{/peliculas/crear}" th:object="${peliculaDTO}" method="post">
+                    <div class="card-header  bg-dark">
+                        <h2 class="text-center text-white" th:text="#{crear} +' '+#{pelicula}"></h2>
+                    </div>
+                    <div class="card-body">
+                    <div class="form-group">
+                        <label th:text="#{titulo}"></label>
+                        <input class="form-control" th:field="*{titulo}" />
+                        <ul class="alert alert-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}">
+<!--                            Nos hemos dado cuenta que con th:errors no hace falta poner los li-->
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label th:text="#{fecha}"></label>
+                        <input type="date" class="form-control" th:field="*{fecha_lanzamiento}"/>
+                        <ul class="alert alert-danger" th:if="${#fields.hasErrors('fecha_lanzamiento')}" th:errors="*{fecha_lanzamiento}">
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label th:text="#{idioma}"></label>
+                        <select class="js-select2 form-control" th:field="*{id_idioma}">
+                            <option value="-1" th:text="#{error.seleccione} +''+#{idioma}"></option>
+                            <option
+                                    th:each="idioma:${listaIdioma}"
+                                    th:value="${idioma.id_idioma}"
+                                    th:text="${'Id: ' + idioma.id_idioma + ' - ' + idioma.nombre}">
+                            </option>
+                        </select>
+                        <ul class="alert alert-danger" th:if="${#fields.hasErrors('id_idioma')}" th:errors="*{id_idioma}">
+                        </ul>
+                    </div>
+
+                        <input class="btn btn-success" type="submit" th:value="#{crear}">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
